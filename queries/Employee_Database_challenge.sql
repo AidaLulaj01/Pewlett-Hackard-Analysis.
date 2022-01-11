@@ -35,3 +35,20 @@ into retiring_titles
 from unique_titles
 group by title
 order by count(emp_no) desc
+
+-----mentorship_eligibilty
+select DISTINCT ON (T.EMP_NO)
+		e.emp_no, 
+		e.first_name, 
+		e.last_name, 
+		e.birth_date,
+		de.from_date,
+		de.to_date,
+		t.title
+Into mentorship_eligibilty
+From employees e
+join dept_emp de on e.emp_no = de.emp_no
+join titles t on e.emp_no = t.emp_no
+where t.to_date = '9999-01-01'
+and birth_date between '1965-01-01' and '1965-12-31'
+order by t.emp_no, t.to_date
